@@ -143,7 +143,7 @@ function BuildingMesh({ building, index }: { building: Building; index: number }
 // --- Streets ---
 function Streets({ width, height }: { width: number; height: number }) {
   const streets = useMemo(() => {
-    const result: JSX.Element[] = [];
+    const result: React.JSX.Element[] = [];
     const totalW = width * (BLOCK_SIZE + STREET_WIDTH);
     const totalH = height * (BLOCK_SIZE + STREET_WIDTH);
 
