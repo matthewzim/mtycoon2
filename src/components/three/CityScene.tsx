@@ -104,7 +104,7 @@ function BlockMesh({ block, isSelected }: { block: Block; isSelected: boolean })
       )}
 
       {/* Special block icon */}
-      {block.isSpecial && (
+      {block.isSpecial && block.name !== 'Stadium' && block.name !== 'City Hall' && (
         <mesh position={[0, 1.5, 0]}>
           <boxGeometry args={[2, 3, 2]} />
           <meshStandardMaterial
@@ -113,6 +113,24 @@ function BlockMesh({ block, isSelected }: { block: Block; isSelected: boolean })
             opacity={0.7}
           />
         </mesh>
+      )}
+
+      {/* City Hall - prominent red-roofed building */}
+      {block.name === 'City Hall' && (
+        <group>
+          <mesh position={[0, 2, 0]}>
+            <boxGeometry args={[8, 4, 8]} />
+            <meshStandardMaterial color="#C4A882" />
+          </mesh>
+          <mesh position={[0, 4.3, 0]}>
+            <boxGeometry args={[9, 0.6, 9]} />
+            <meshStandardMaterial color="#8B1A1A" />
+          </mesh>
+          <mesh position={[0, 5, 0]}>
+            <cylinderGeometry args={[0.3, 0.3, 1.5, 8]} />
+            <meshStandardMaterial color="#FFD700" />
+          </mesh>
+        </group>
       )}
     </group>
   );
@@ -208,18 +226,70 @@ function CitizenInstances() {
 
 // --- Water ---
 function Water() {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef1 = useRef<THREE.Mesh>(null);
+  const meshRef2 = useRef<THREE.Mesh>(null);
+  const meshRef3 = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.position.y = -0.5 + Math.sin(clock.elapsedTime * 0.5) * 0.05;
-    }
+    const y = -0.3 + Math.sin(clock.elapsedTime * 0.5) * 0.05;
+    if (meshRef1.current) meshRef1.current.position.y = y;
+    if (meshRef2.current) meshRef2.current.position.y = y;
+    if (meshRef3.current) meshRef3.current.position.y = y;
   });
 
+  // Water covers: bottom edge of map, row 6 cols 2-6, and flows through lower-right corner
+  const blockStep = BLOCK_SIZE + STREET_WIDTH; // 14
   return (
-    <mesh ref={meshRef} position={[42, -0.5, 80]} receiveShadow>
-      <boxGeometry args={[120, 0.1, 40]} />
-      <meshStandardMaterial color="#1A5276" transparent opacity={0.8} />
-    </mesh>
+    <group>
+      {/* Bottom water strip - covers row 6 empty positions (cols 2-6) and extends beyond */}
+      <mesh ref={meshRef1} position={[56, -0.3, 92]} receiveShadow>
+        <boxGeometry args={[140, 0.15, 24]} />
+        <meshStandardMaterial color="#1A5276" transparent opacity={0.8} />
+      </mesh>
+      {/* Right-side water flowing up through lower-right corner (cols 5-6, rows 5-6) */}
+      <mesh ref={meshRef2} position={[91, -0.3, 80]} receiveShadow>
+        <boxGeometry args={[30, 0.15, 35]} />
+        <meshStandardMaterial color="#1A5276" transparent opacity={0.75} />
+      </mesh>
+      {/* Extended water beyond map edges */}
+      <mesh ref={meshRef3} position={[56, -0.35, 110]} receiveShadow>
+        <boxGeometry args={[160, 0.15, 30]} />
+        <meshStandardMaterial color="#1A5276" transparent opacity={0.85} />
+      </mesh>
+    </group>
+  );
+}
+
+// --- Stadium Visual (baseball diamond) ---
+function StadiumMesh({ block }: { block: Block }) {
+  const x = block.gridX * (BLOCK_SIZE + STREET_WIDTH);
+  const z = block.gridY * (BLOCK_SIZE + STREET_WIDTH);
+
+  return (
+    <group position={[x, 0.2, z]}>
+      {/* Baseball field - green grass */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
+        <circleGeometry args={[5, 32]} />
+        <meshStandardMaterial color="#228B22" />
+      </mesh>
+      {/* Diamond infield - dirt */}
+      <mesh rotation={[-Math.PI / 2, 0, Math.PI / 4]} position={[0, 0.02, -0.5]}>
+        <planeGeometry args={[4, 4]} />
+        <meshStandardMaterial color="#C4A265" />
+      </mesh>
+      {/* Stadium seating - curved wall */}
+      <mesh position={[0, 1.2, -2]}>
+        <boxGeometry args={[10, 2.4, 1.5]} />
+        <meshStandardMaterial color="#666666" />
+      </mesh>
+      <mesh position={[-4, 1.2, 0]}>
+        <boxGeometry args={[1.5, 2.4, 6]} />
+        <meshStandardMaterial color="#666666" />
+      </mesh>
+      <mesh position={[4, 1.2, 0]}>
+        <boxGeometry args={[1.5, 2.4, 6]} />
+        <meshStandardMaterial color="#666666" />
+      </mesh>
+    </group>
   );
 }
 
@@ -307,6 +377,11 @@ export function CityScene() {
           block={block}
           isSelected={block.id === selectedBlockId}
         />
+      ))}
+
+      {/* Stadium baseball diamond visual */}
+      {blocks.filter(b => b.name === 'Stadium').map(block => (
+        <StadiumMesh key={`stadium_${block.id}`} block={block} />
       ))}
 
       <CitizenInstances />

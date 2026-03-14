@@ -15,26 +15,26 @@ const BLOCK_DEFS: BlockDef[] = [
   { name: 'Oriental', gridX: 0, gridY: 0, colorGroup: 'brown', prestige: 2, isSpecial: false },
   { name: 'Vermont', gridX: 1, gridY: 0, colorGroup: 'brown', prestige: 2, isSpecial: false },
   { name: 'Telecoms', gridX: 2, gridY: 0, colorGroup: 'utility', prestige: 0, isSpecial: true, specialType: 'utility' },
-  { name: 'Conn Ave', gridX: 3, gridY: 0, colorGroup: 'lightblue', prestige: 3, isSpecial: false },
+  { name: 'Bus/Taxi', gridX: 3, gridY: 0, colorGroup: 'special', prestige: 0, isSpecial: true, specialType: 'community' },
   { name: 'B&O Rail', gridX: 4, gridY: 0, colorGroup: 'railroad', prestige: 0, isSpecial: true, specialType: 'railroad' },
-  { name: 'Bus/Taxi', gridX: 5, gridY: 0, colorGroup: 'special', prestige: 0, isSpecial: true, specialType: 'community' },
+  { name: 'Pacific', gridX: 5, gridY: 0, colorGroup: 'green', prestige: 4, isSpecial: false },
   { name: 'Airport', gridX: 6, gridY: 0, colorGroup: 'special', prestige: 0, isSpecial: true, specialType: 'community' },
 
   // Row 1
-  { name: 'Zoo', gridX: 0, gridY: 1, colorGroup: 'special', prestige: 3, isSpecial: true, specialType: 'community' },
-  { name: 'Indiana', gridX: 1, gridY: 1, colorGroup: 'red', prestige: 3, isSpecial: false },
-  { name: 'Kentucky', gridX: 2, gridY: 1, colorGroup: 'red', prestige: 3, isSpecial: false },
-  { name: 'Campus', gridX: 3, gridY: 1, colorGroup: 'special', prestige: 4, isSpecial: true, specialType: 'community' },
-  { name: 'St. James', gridX: 4, gridY: 1, colorGroup: 'orange', prestige: 3, isSpecial: false },
-  { name: 'Tenn Ave', gridX: 5, gridY: 1, colorGroup: 'orange', prestige: 3, isSpecial: false },
-  { name: 'Pacific', gridX: 6, gridY: 1, colorGroup: 'green', prestige: 4, isSpecial: false },
+  { name: 'Conn Ave', gridX: 0, gridY: 1, colorGroup: 'lightblue', prestige: 3, isSpecial: false },
+  { name: 'Zoo', gridX: 1, gridY: 1, colorGroup: 'special', prestige: 3, isSpecial: true, specialType: 'community' },
+  { name: 'Indiana', gridX: 2, gridY: 1, colorGroup: 'red', prestige: 3, isSpecial: false },
+  { name: 'Kentucky', gridX: 3, gridY: 1, colorGroup: 'red', prestige: 3, isSpecial: false },
+  { name: 'Campus', gridX: 4, gridY: 1, colorGroup: 'special', prestige: 4, isSpecial: true, specialType: 'community' },
+  { name: 'St. James', gridX: 5, gridY: 1, colorGroup: 'orange', prestige: 3, isSpecial: false },
+  { name: 'Tenn Ave', gridX: 6, gridY: 1, colorGroup: 'orange', prestige: 3, isSpecial: false },
 
   // Row 2
   { name: 'School', gridX: 0, gridY: 2, colorGroup: 'special', prestige: 3, isSpecial: true, specialType: 'community' },
   { name: 'Illinois', gridX: 1, gridY: 2, colorGroup: 'red', prestige: 3, isSpecial: false },
-  { name: 'Community', gridX: 2, gridY: 2, colorGroup: 'special', prestige: 2, isSpecial: true, specialType: 'community' },
-  { name: 'New York', gridX: 3, gridY: 2, colorGroup: 'orange', prestige: 4, isSpecial: false },
-  { name: 'Electric', gridX: 4, gridY: 2, colorGroup: 'utility', prestige: 0, isSpecial: true, specialType: 'utility' },
+  { name: 'Electric', gridX: 2, gridY: 2, colorGroup: 'utility', prestige: 0, isSpecial: true, specialType: 'utility' },
+  { name: 'City Hall', gridX: 3, gridY: 2, colorGroup: 'special', prestige: 5, isSpecial: true, specialType: 'community' },
+  { name: 'New York', gridX: 4, gridY: 2, colorGroup: 'orange', prestige: 4, isSpecial: false },
   { name: 'N Carolina', gridX: 5, gridY: 2, colorGroup: 'green', prestige: 4, isSpecial: false },
   { name: 'Penn Rail', gridX: 6, gridY: 2, colorGroup: 'railroad', prestige: 0, isSpecial: true, specialType: 'railroad' },
 
@@ -42,31 +42,32 @@ const BLOCK_DEFS: BlockDef[] = [
   { name: 'Short Rail', gridX: 0, gridY: 3, colorGroup: 'railroad', prestige: 0, isSpecial: true, specialType: 'railroad' },
   { name: 'Hospital', gridX: 1, gridY: 3, colorGroup: 'special', prestige: 3, isSpecial: true, specialType: 'community' },
   { name: 'Police', gridX: 2, gridY: 3, colorGroup: 'special', prestige: 3, isSpecial: true, specialType: 'community' },
-  { name: 'Marvin', gridX: 3, gridY: 3, colorGroup: 'yellow', prestige: 4, isSpecial: false },
-  { name: 'Museum', gridX: 4, gridY: 3, colorGroup: 'special', prestige: 5, isSpecial: true, specialType: 'community' },
+  { name: 'St. Charles', gridX: 3, gridY: 3, colorGroup: 'pink', prestige: 3, isSpecial: false },
+  { name: 'Marvin', gridX: 4, gridY: 3, colorGroup: 'yellow', prestige: 4, isSpecial: false },
   { name: 'Penn Ave', gridX: 5, gridY: 3, colorGroup: 'green', prestige: 4, isSpecial: false },
   { name: 'Marina', gridX: 6, gridY: 3, colorGroup: 'special', prestige: 3, isSpecial: true, specialType: 'community' },
 
   // Row 4
-  { name: 'St. Charles', gridX: 0, gridY: 4, colorGroup: 'pink', prestige: 3, isSpecial: false },
+  { name: 'States Ave', gridX: 0, gridY: 4, colorGroup: 'pink', prestige: 3, isSpecial: false },
   { name: 'Virginia', gridX: 1, gridY: 4, colorGroup: 'pink', prestige: 3, isSpecial: false },
   { name: 'Ventnor', gridX: 2, gridY: 4, colorGroup: 'yellow', prestige: 4, isSpecial: false },
-  { name: 'Boardwalk', gridX: 3, gridY: 4, colorGroup: 'darkblue', prestige: 5, isSpecial: false },
-  { name: 'Park Place', gridX: 4, gridY: 4, colorGroup: 'darkblue', prestige: 5, isSpecial: false },
-  { name: 'Atlantic', gridX: 5, gridY: 4, colorGroup: 'yellow', prestige: 4, isSpecial: false },
+  { name: 'Museum', gridX: 3, gridY: 4, colorGroup: 'special', prestige: 5, isSpecial: true, specialType: 'community' },
+  { name: 'Boardwalk', gridX: 4, gridY: 4, colorGroup: 'darkblue', prestige: 5, isSpecial: false },
+  { name: 'Park Place', gridX: 5, gridY: 4, colorGroup: 'darkblue', prestige: 5, isSpecial: false },
   { name: 'Baltic', gridX: 6, gridY: 4, colorGroup: 'brown', prestige: 2, isSpecial: false },
 
   // Row 5
-  { name: 'States Ave', gridX: 0, gridY: 5, colorGroup: 'pink', prestige: 3, isSpecial: false },
+  { name: 'Albany', gridX: 0, gridY: 5, colorGroup: 'special', prestige: 2, isSpecial: true, specialType: 'community' },
   { name: 'Gasworks', gridX: 1, gridY: 5, colorGroup: 'utility', prestige: 0, isSpecial: true, specialType: 'utility' },
   { name: 'Reading Rail', gridX: 2, gridY: 5, colorGroup: 'railroad', prestige: 0, isSpecial: true, specialType: 'railroad' },
   { name: 'Jefferson', gridX: 3, gridY: 5, colorGroup: 'lightblue', prestige: 3, isSpecial: false },
   { name: 'Hempstead', gridX: 4, gridY: 5, colorGroup: 'lightblue', prestige: 3, isSpecial: false },
-  { name: 'Albany', gridX: 5, gridY: 5, colorGroup: 'special', prestige: 2, isSpecial: true, specialType: 'community' },
+  { name: 'Atlantic', gridX: 5, gridY: 5, colorGroup: 'yellow', prestige: 4, isSpecial: false },
   { name: 'Water Works', gridX: 6, gridY: 5, colorGroup: 'utility', prestige: 0, isSpecial: true, specialType: 'utility' },
 
-  // Row 6 (bottom)
-  { name: 'Med Ave', gridX: 0, gridY: 6, colorGroup: 'brown', prestige: 2, isSpecial: false },
+  // Row 6 (bottom) - stadium in lower left, rest is waterfront
+  { name: 'Stadium', gridX: 0, gridY: 6, colorGroup: 'special', prestige: 4, isSpecial: true, specialType: 'community' },
+  { name: 'Med Ave', gridX: 1, gridY: 6, colorGroup: 'brown', prestige: 2, isSpecial: false },
 ];
 
 let blockIdCounter = 0;
