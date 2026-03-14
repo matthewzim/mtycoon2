@@ -38,10 +38,29 @@ export function Minimap() {
   const totalW = width * (CELL + GAP);
   const totalH = height * (CELL + GAP);
 
+  // Water tile positions (row 6, cols 2-6)
+  const waterTiles: { x: number; y: number }[] = [];
+  for (let col = 2; col <= 6; col++) {
+    waterTiles.push({ x: col, y: 6 });
+  }
+
   return (
     <div className="absolute bottom-2 right-2 z-50">
       <div className="bg-black/80 rounded-lg p-2 border border-blue-800 shadow-xl">
         <svg width={totalW} height={totalH}>
+          {/* Water tiles */}
+          {waterTiles.map((tile, i) => (
+            <rect
+              key={`water_${i}`}
+              x={tile.x * (CELL + GAP)}
+              y={tile.y * (CELL + GAP)}
+              width={CELL}
+              height={CELL}
+              fill="#1A5276"
+              rx={1}
+              opacity={0.7}
+            />
+          ))}
           {blocks.map(block => {
             const x = block.gridX * (CELL + GAP);
             const y = block.gridY * (CELL + GAP);
