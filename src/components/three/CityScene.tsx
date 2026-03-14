@@ -57,7 +57,7 @@ function BlockMesh({ block, isSelected }: { block: Block; isSelected: boolean })
       >
         <boxGeometry args={[BLOCK_SIZE, 0.3, BLOCK_SIZE]} />
         <meshStandardMaterial
-          color={isSelected ? '#FFFFCC' : '#8B9B6B'}
+          color={isSelected ? '#FFFFCC' : block.name === 'Waterfront' ? '#1A4A6B' : block.name === 'Stadium' ? '#2E5E2E' : '#8B9B6B'}
           emissive={isSelected ? '#333300' : '#000000'}
         />
       </mesh>
@@ -104,7 +104,7 @@ function BlockMesh({ block, isSelected }: { block: Block; isSelected: boolean })
       )}
 
       {/* Special block icon */}
-      {block.isSpecial && (
+      {block.isSpecial && block.name !== 'Waterfront' && block.name !== 'Stadium' && (
         <mesh position={[0, 1.5, 0]}>
           <boxGeometry args={[2, 3, 2]} />
           <meshStandardMaterial
@@ -113,6 +113,28 @@ function BlockMesh({ block, isSelected }: { block: Block; isSelected: boolean })
             opacity={0.7}
           />
         </mesh>
+      )}
+
+      {/* Waterfront — water surface */}
+      {block.name === 'Waterfront' && (
+        <mesh position={[0, 0.05, 0]}>
+          <boxGeometry args={[BLOCK_SIZE, 0.15, BLOCK_SIZE]} />
+          <meshStandardMaterial color="#1A5276" transparent opacity={0.75} />
+        </mesh>
+      )}
+
+      {/* Stadium — baseball diamond */}
+      {block.name === 'Stadium' && (
+        <group>
+          <mesh position={[0, 0.2, 0]}>
+            <boxGeometry args={[BLOCK_SIZE - 1, 0.4, BLOCK_SIZE - 1]} />
+            <meshStandardMaterial color="#4A7C4B" />
+          </mesh>
+          <mesh position={[0, 0.45, 0]} rotation={[0, Math.PI / 4, 0]}>
+            <boxGeometry args={[4, 0.05, 4]} />
+            <meshStandardMaterial color="#C4A35A" />
+          </mesh>
+        </group>
       )}
     </group>
   );
@@ -216,8 +238,8 @@ function Water() {
   });
 
   return (
-    <mesh ref={meshRef} position={[42, -0.5, 80]} receiveShadow>
-      <boxGeometry args={[120, 0.1, 40]} />
+    <mesh ref={meshRef} position={[56, -0.5, 92]} receiveShadow>
+      <boxGeometry args={[90, 0.1, 30]} />
       <meshStandardMaterial color="#1A5276" transparent opacity={0.8} />
     </mesh>
   );

@@ -49,7 +49,9 @@ export function Minimap() {
 
             // Determine color
             let fill = GROUP_COLORS[block.colorGroup] || '#444';
-            if (block.landlord && block.landlord !== 'city') {
+            if (block.name === 'Waterfront') fill = '#1A5276';
+            else if (block.name === 'Stadium') fill = '#2E7D32';
+            else if (block.landlord && block.landlord !== 'city') {
               const idx = players.findIndex(p => p.id === block.landlord);
               fill = OWNER_COLORS[idx] || fill;
             }
